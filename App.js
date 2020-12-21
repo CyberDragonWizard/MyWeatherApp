@@ -2,9 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState }  from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
-import Weather from './Components/Weather'
+import Weather from './Components/Weather';
+import { WEATHER_API_KEY } from 'react-native-dotenv';
 
-const WEATHER_API_KEY = '56cf9d89021d6fa5f6f11dc98cce6f6c';
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
 export default function App() {
