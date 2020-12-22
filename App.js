@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
 import Weather from './Components/Weather';
 import { WEATHER_API_KEY } from 'react-native-dotenv';
+import Picker from './Components/UnitsPicker'
 
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
@@ -14,7 +15,7 @@ export default function App() {
 
   useEffect(() => {
     load()
-  }, [])
+  }, [units])
     async function load() {
       try {
         let { status } = await Location.requestPermissionsAsync();
@@ -45,11 +46,11 @@ export default function App() {
     }
 
   if(currentWeather) {
-    const { main : {temp}} = currentWeather
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.main}>
+          <Picker units={units} setUnits={setUnits}/>
           <Weather currentWeather={currentWeather}/>
         </View>
       </View>
