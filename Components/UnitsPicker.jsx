@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { Picker } from '@react-native-community/picker';
 import AppLoading from 'expo-app-loading';
 import { 
@@ -19,23 +19,29 @@ export default function UnitsPicker({units, setUnits}) {
 
     const styles = StyleSheet.create({
         unitsSystem: {
-            position: 'absolute',
-            top: 100,
-            left: 20,
-            height: 50,
-            width: 80,
+          position: "absolute",
+          ...Platform.select({
+            ios: {
+              top: -30,
+            },
+            android: {
+              top: 50,
+            },
+          }),
+          left: 20,
+          height: 50,
+          width: 100,
         },
-        unit: {
-            fontFamily:'Hanuman_400Regular',
-            fontSize: 800,
+        picker: {
+            color: '#006894',
         }
-    });
+      });
 
     return (
         <View style={styles.unitsSystem}>
-            <Picker style={styles.unit} selectedValue={units} onValueChange={(item) => setUnits(item)}>
-                <Picker.Item style={styles.unit} label="C°" value='metric' />
-                <Picker.Item style={styles.unit} label="F°" value='imperial' />
+            <Picker style={styles.picker} selectedValue={units} onValueChange={(item) => setUnits(item)} mode='dropdown'>
+                <Picker.Item label="F°" value='imperial' />
+                <Picker.Item label="C°" value='metric' />
             </Picker>
         </View>
     )
